@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <title>&&</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="js/jquery-1.11.3.min.js"></script>
+		<script src="js/participants.js"></script>
+		<script language="javascript">
+		$(function() {
+			$.each(allParticipants, function( index, value ) {
+			  $('.listName').append('<li>'+value.name+'</li>');
+			});	
+			
+			$.each(allParticipants, function( index, value ) {
+			  $('.listChecked').append('<li>'+value.checked+'</li>');
+			});				
+		});			
+		</script>		
+    </head>
+    <body>
+
+	<ul class="listName">
+	</ul>
+	<br>
+	<ul class="listChecked">
+	</ul>	
+    </body>
+</html>
