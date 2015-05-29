@@ -1,0 +1,56 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Test Raffle No Repeat</title>
+    <script type="text/javascript" src="../app/jsUnitCore.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="../../js/participants.js"></script>
+	<script type="text/javascript" src="../../js/raffle.js"></script>
+    <script type="text/javascript">
+        function testRaffledSameObject() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"1"}, 
+							   {"id":"1", "name":"Abraão Barros", "checked":"1"}];
+			raffledsParticipants = [];
+		
+			var item1 = executeRaffle();
+			
+			var item2 = executeRaffle();
+		
+            assertObjectEquals(item1.raffled, {"id":"1", "name":"Abraão Barros", "checked":"1"});
+			assertEquals(item2.raffled, null);
+        }
+		
+        function testRaffledItem2IsNotNull() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"1"}, 
+							   {"id":"2", "name":"Adão Goulart", "checked":"1"}];
+			raffledsParticipants = [];
+		
+			var item1 = executeRaffle();
+			
+			var item2 = executeRaffle();
+		
+			assertNotEquals(item1.raffled, null);
+			assertNotEquals(item2.raffled, null);
+        }
+		
+        function testRaffledItem3IsNull() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"1"}, 
+							   {"id":"2", "name":"Adão Goulart", "checked":"1"}];
+			raffledsParticipants = [];
+		
+			var item1 = executeRaffle();
+			
+			var item2 = executeRaffle();
+			
+			var item3 = executeRaffle();
+		
+			assertNotEquals(item1.raffled, null);
+			assertNotEquals(item2.raffled, null);
+			assertEquals(item3.raffled, null);
+        }		
+    </script>
+</head>
+<body>
+</body>
+</html>
