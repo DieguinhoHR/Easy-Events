@@ -33,3 +33,5 @@
 	{"id":"32", "name":"Verónica Covinha", "checked":"1"}, 
 	{"id":"33", "name":"Ítalo Larangeira", "checked":"0"}
 ];
+
+var raffledsParticipants = [];
