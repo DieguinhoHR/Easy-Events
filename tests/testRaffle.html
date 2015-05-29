@@ -1,0 +1,127 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Test Raffle</title>
+    <script type="text/javascript" src="../app/jsUnitCore.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="../../js/participants.js"></script>
+	<script type="text/javascript" src="../../js/raffle.js"></script>
+    <script type="text/javascript">
+        function testRaffleInit() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"1"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"1"}, 
+								{"id":"3", "name":"Adélia Rivero", "checked":"1"}];
+		
+			var item = executeRaffle();
+		
+            assertNotEquals(item.raffled, null);
+			assertEquals(item.message, "");
+        }
+	
+        function testRaffleZero() {
+			allParticipants = [];
+		
+			var item = executeRaffle();
+		
+            assertEquals(item.raffled, null);
+			assertEquals(item.message, "Participantes válidos insuficientes!");
+        }
+		
+        function testRaffleOne() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"1"}];
+		
+			var item = executeRaffle();
+		
+            assertEquals(item.raffled, null);
+			assertEquals(item.message, "Participantes válidos insuficientes!");
+        }
+		
+        function testRaffleTwo() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"1"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"1"}];
+		
+			var item = executeRaffle();
+		
+            assertNotEquals(item.raffled, null);
+			assertEquals(item.message, "");
+        }
+		
+        function testRaffleThreeOrMore() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"1"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"1"}, 
+								{"id":"3", "name":"Adélia Rivero", "checked":"1"}];
+		
+			var item = executeRaffle();
+		
+            assertNotEquals(item.raffled, null);
+			assertEquals(item.message, "");
+        }
+		
+        function testRaffleTwoCheckedTrue() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"1"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"1"}];
+		
+			var item = executeRaffle();
+		
+            assertNotEquals(item.raffled, null);
+			assertEquals(item.message, "");
+        }
+		
+        function testRaffleTwoCheckedFalse() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"0"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"0"}];
+		
+			var item = executeRaffle();
+		
+            assertEquals(item.raffled, null);
+			assertEquals(item.message, "Participantes válidos insuficientes!");
+        }
+		
+        function testRaffleTwoCheckedMix1() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"1"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"0"}];
+		
+			var item = executeRaffle();
+		
+            assertEquals(item.raffled, null);
+			assertEquals(item.message, "Participantes válidos insuficientes!");
+        }
+		
+        function testRaffleTwoCheckedMix2() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"0"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"1"}];
+		
+			var item = executeRaffle();
+		
+            assertEquals(item.raffled, null);
+			assertEquals(item.message, "Participantes válidos insuficientes!");
+        }
+		
+        function testRaffleThreeCheckedMix1() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"1"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"0"},
+								{"id":"13", "name":"Floripes Ferraço", "checked":"1"}];
+		
+			var item = executeRaffle();
+		
+            assertNotEquals(item.raffled, null);
+			assertEquals(item.message, "");
+        }
+		
+		function testRaffleThreeCheckedMix2() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"1"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"0"},
+								{"id":"13", "name":"Floripes Ferraço", "checked":"0"}];
+		
+			var item = executeRaffle();
+		
+            assertEquals(item.raffled, null);
+			assertEquals(item.message, "Participantes válidos insuficientes!");
+        }
+		
+    </script>
+</head>
+<body>
+</body>
+</html>
