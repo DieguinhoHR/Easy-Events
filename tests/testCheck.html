@@ -1,0 +1,109 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Test Search</title>
+    <script type="text/javascript" src="../app/jsUnitCore.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="../../js/participants.js"></script>
+	<script type="text/javascript" src="../../js/check.js"></script>
+    <script type="text/javascript">
+        function testCheckNotExist() {
+			var idParticipant = null;
+		
+			var someCheked = checkParticipant(idParticipant);
+		
+            assertFalse(someCheked);
+        }
+		
+        function testCheckParticipantNotExist() {
+			var idParticipant = 0;
+		
+			var someCheked = checkParticipant(idParticipant);
+		
+            assertFalse(someCheked);
+        }
+		
+        function testCheckParticipantNotExistIdString() {
+			var idParticipant = "0";
+		
+			var someCheked = checkParticipant(idParticipant);
+		
+            assertFalse(someCheked);
+        }
+		
+        function testCheckParticipantExistIdInt() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"0"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"0"}, 
+								{"id":"3", "name":"Adélia Rivero", "checked":"0"}];				
+		
+			var idParticipant = 1;
+		
+			var someCheked = checkParticipant(idParticipant);
+		
+            assertTrue(someCheked);
+			assertEquals(allParticipants[0].checked, "1");
+			assertEquals(allParticipants[1].checked, "0");
+			assertEquals(allParticipants[2].checked, "0");
+        }
+		
+        function testCheckParticipantExistIdString() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"0"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"0"}, 
+								{"id":"3", "name":"Adélia Rivero", "checked":"0"}];				
+		
+			var idParticipant = "1";
+		
+			var someCheked = checkParticipant(idParticipant);
+		
+            assertTrue(someCheked);
+			assertEquals(allParticipants[0].checked, "1");
+			assertEquals(allParticipants[1].checked, "0");
+			assertEquals(allParticipants[2].checked, "0");
+        }
+		
+        function testCheckParticipantExistIdString2() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"0"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"0"}, 
+								{"id":"3", "name":"Adélia Rivero", "checked":"0"}];
+		
+			var idParticipant = "2";
+		
+			var someCheked = checkParticipant(idParticipant);
+		
+            assertTrue(someCheked);
+			assertEquals(allParticipants[0].checked, "0");
+			assertEquals(allParticipants[1].checked, "1");
+			assertEquals(allParticipants[2].checked, "0");
+        }
+		
+        function testCheckParticipantNotExist2() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"0"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"0"}, 
+								{"id":"3", "name":"Adélia Rivero", "checked":"0"}];
+		
+			var idParticipant = "200";
+		
+			var someCheked = checkParticipant(idParticipant);
+		
+            assertFalse(someCheked);
+			assertEquals(allParticipants[0].checked, "0");
+			assertEquals(allParticipants[1].checked, "0");
+			assertEquals(allParticipants[2].checked, "0");
+        }
+		
+        function testCheckParticipantEmpty() {
+			allParticipants = [];
+		
+			var idParticipant = "1";
+		
+			var someCheked = checkParticipant(idParticipant);
+		
+            assertFalse(someCheked);
+			assertEquals(allParticipants.length, 0);
+        }		
+    </script>
+</head>
+<body>
+</body>
+</html>
