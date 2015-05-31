@@ -1,0 +1,114 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Test Search</title>
+    <script type="text/javascript" src="../app/jsUnitCore.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="../../js/participants.js"></script>
+	<script type="text/javascript" src="../../js/search.js"></script>
+    <script type="text/javascript">
+        function testSearchEmpty() {
+			var searchValue = "";
+		
+			var item = searchParticipant(searchValue);
+		
+            assertEquals(item.results.length, 0);
+			assertNotEquals(item.results, null);
+			assertEquals(item.message, "Nenhum participante encontrado!");
+        }
+		
+        function testSearchNull() {
+			var searchValue = null;
+		
+			var item = searchParticipant(searchValue);
+		
+            assertEquals(item.results.length, 0);
+			assertEquals(item.message, "Nenhum participante encontrado!");
+        }
+		
+        function testSearchValueInitialName1Result() {
+			allParticipants = [{"id":"1", "name":"Abraão Barros", "checked":"1"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"1"}, 
+								{"id":"3", "name":"Adélia Rivero", "checked":"1"}];		
+		
+			var searchValue = "Abraão";
+		
+			var item = searchParticipant(searchValue);
+		
+            assertEquals(item.results.length, 1);
+			assertEquals(item.results[0].name, "Abraão Barros");
+			assertEquals(item.message, "");
+        }
+		
+        function testSearchValueFinalName1Result() {
+			allParticipants = [{"id":"1", "name":"Abraão Marcos Barros", "checked":"1"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"1"}, 
+								{"id":"3", "name":"Adélia Rivero", "checked":"1"}];		
+		
+			var searchValue = "Barros";
+		
+			var item = searchParticipant(searchValue);
+		
+            assertEquals(item.results.length, 1);
+			assertEquals(item.results[0].name, "Abraão Marcos Barros");
+			assertEquals(item.message, "");
+        }
+		
+        function testSearchValueMiddleName1Result() {
+			allParticipants = [{"id":"1", "name":"Abraão Marcos Barros", "checked":"1"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"1"}, 
+								{"id":"3", "name":"Adélia Rivero", "checked":"1"}];		
+		
+			var searchValue = "Marcos";
+		
+			var item = searchParticipant(searchValue);
+		
+            assertEquals(item.results.length, 1);
+			assertEquals(item.results[0].name, "Abraão Marcos Barros");
+			assertEquals(item.message, "");
+        }
+		
+        function testSearchValueName0Result() {
+			allParticipants = [{"id":"1", "name":"Abraão Marcos Barros", "checked":"1"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"1"}, 
+								{"id":"3", "name":"Adélia Rivero", "checked":"1"}];		
+		
+			var searchValue = "Eduardo";
+		
+			var item = searchParticipant(searchValue);
+		
+            assertEquals(item.results.length, 0);
+			assertEquals(item.message, "Nenhum participante encontrado!");
+        }
+		
+        function testSearchEmptyParticipants0Result() {
+			allParticipants = [];
+		
+			var searchValue = "Eduardo";
+		
+			var item = searchParticipant(searchValue);
+		
+            assertEquals(item.results.length, 0);
+			assertEquals(item.message, "Nenhum participante encontrado!");
+        }
+		
+        function testSearchValueName2Results() {
+			allParticipants = [{"id":"1", "name":"Abraão Marcos Barros", "checked":"1"}, 
+								{"id":"2", "name":"Adão Goulart", "checked":"1"}, 
+								{"id":"3", "name":"Adélia Marcos Rivero", "checked":"1"}];
+		
+			var searchValue = "Marcos";
+		
+			var item = searchParticipant(searchValue);
+		
+            assertEquals(item.results.length, 2);
+			assertEquals(item.results[0].name, "Abraão Marcos Barros");
+			assertEquals(item.results[1].name, "Adélia Marcos Rivero");
+			assertEquals(item.message, "");
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
